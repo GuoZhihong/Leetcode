@@ -24,10 +24,14 @@ The input string length won't exceed 1000.
 * */
 
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class PalindromicSubstrings647 {
     public static void main(String[] args) {//done in 35mins
-        System.out.println(countSubstrings("abc"));
-        System.out.println(countSubstrings("aaa"));
+        System.out.println(countSubstrings2("abc"));
+        System.out.println(countSubstrings2("aaa"));
     }
 
     public static int countSubstrings(String s) {
@@ -40,6 +44,28 @@ public class PalindromicSubstrings647 {
                 if(s1.equals(s2)){
                     counter++;
                 }
+            }
+        }
+        return counter;
+    }
+
+    public static int countSubstrings2(String s) {
+        Queue<Character> queue = new LinkedList<>();
+        Queue<Character> queue2 = new LinkedList<>();
+        int counter = 0;
+        String s2 = new StringBuilder(s).reverse().toString();
+        for (int i = 0; i < s.length(); i++) {
+            queue.offer(s.charAt(i));
+            queue2.offer(s2.charAt(i));
+        }
+        String x,y;
+        StringBuilder stringBuilder1 = new StringBuilder();
+        StringBuilder stringBuilder2 = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            x = stringBuilder1.append(queue.poll()).toString();
+            y = stringBuilder2.append(queue2.poll()).toString();
+            if(x.equals(y)){
+                counter++;
             }
         }
         return counter;
