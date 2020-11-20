@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashMap;
 
 /*
@@ -28,11 +29,15 @@ Output: 4
 * */
 public class SingleNumber {
     public static void main(String[] args) {
-        int[] x = {2, 2, 1};
+        int[] x = {1,3,1,-1,3};
         int[] y = {4, 1, 2, 1, 2};
+        int[] z = {1,1,2,3,3};
         System.out.println(singleNumber(x));
         System.out.println(singleNumber(y));
+        System.out.println(singleNumber(z));
     }
+
+    /*
     public static int singleNumber(int[] nums) {
         HashMap<Integer,Integer> x = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -48,6 +53,24 @@ public class SingleNumber {
             }
         }
         return 0;
+    }
+*/
+    public static int singleNumber(int[] nums) {
+        Arrays.sort(nums);
+        int result = nums[0],index = 0;//first single
+        while (index < nums.length - 1){
+            if(nums[index] == nums[index + 1]){
+                index += 2;
+            }else {//mid single
+                result = nums[index];
+                index++;
+            }
+            if(index == nums.length - 1){//last single
+                return nums[nums.length - 1];
+            }
+        }
+
+        return result;
     }
 
 }
